@@ -20,7 +20,7 @@ app.add_middleware(
 
 # carga modelos al arrancar
 detection_model = YOLO("runs/detect/models/volleyvision_v1-2/weights/best.pt")
-events_model    = YOLO("runs/detect/models/volleyvision_events_v1-2-3/weights/volleyvision_events_best_final.pt")
+events_model    = YOLO("runs/detect/models/volleyvision_events_v1-2-3/weights/volleyvision_multiangle_best2.pt")
 
 CONF_POR_CLASE = {
     "service":      0.75,
