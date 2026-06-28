@@ -1,0 +1,56 @@
+name: VolleyVision CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          pip install ultralytics opencv-python-headless \
+                      streamlit plotly pandas scikit-learn \
+                      fastapi uvicorn python-multipart
+
+      - name: Verificar imports
+        run: |
+          python -c "from ultralytics import YOLO; print('YOLO OK')"
+          python -c "import cv2; print('OpenCV OK')"
+          python -c "import streamlit; print('Streamlit OK')"
+          python -c "from fastapi import FastAPI; print('FastAPI OK')"
+          python -c "from sklearn.decomposition import PCA; print('sklearn OK')"
+
+      - name: Verificar estructura del proyecto
+        run: |
+          python -c "
+          from pathlib import Path
+          archivos = [
+            'src/dashboard/app.py',
+            'src/api/main.py',
+            'src/scouting/scouting.py',
+            'src/detection/train.py',
+            'src/events/train_events.py',
+            'Dockerfile',
+            'docker-compose.yml',
+          ]
+          for f in archivos:
+            assert Path(f).exists(), f'Falta: {f}'
+            print(f'OK: {f}')
+          print('Estructura del proyecto correcta')
+          "
+
+      - name: Build Docker image
+        run: docker build -t volleyvision-ai .

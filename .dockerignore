@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+data/raw/
+data/annotations/
+*.mp4
+*.avi
+*.mov
+notebooks/
+.DS_Store
+runs/detect/models/volleyvision_v1*/
+runs/detect/models/volleyvision_events*/

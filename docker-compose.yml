@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  volleyvision:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data/processed:/app/data/processed
+      - ./models:/app/models
+    environment:
+      - ROBOFLOW_API_KEY=${ROBOFLOW_API_KEY}
+    restart: unless-stopped

@@ -1,0 +1,38 @@
+# entorno virtual
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# datos pesados
+data/raw/
+data/annotations/
+data/processed/
+
+# modelos entrenados (demasiado grandes para GitHub)
+*.pt
+*.pth
+*.onnx
+
+# vídeos
+*.mp4
+*.avi
+*.mov
+
+# runs de YOLO (miles de archivos)
+runs/
+
+# notebooks checkpoints
+.ipynb_checkpoints/
+
+# sistema
+.DS_Store
+.env
+Thumbs.db
+
+# Docker
+*.log
