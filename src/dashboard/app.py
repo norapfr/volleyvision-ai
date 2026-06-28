@@ -23,8 +23,32 @@ st.markdown("*Sistema automático de análisis táctico para voleibol*")
 
 @st.cache_resource
 def load_models():
-    detection = YOLO("runs/detect/models/volleyvision_v1-2/weights/best.pt")
-    events    = YOLO("runs/detect/models/volleyvision_events_v1-2-3/weights/volleyvision_multiangle_best2.pt")
+    from huggingface_hub import hf_hub_download
+    from pathlib import Path
+
+    Path("models").mkdir(exist_ok=True)
+
+    detection_path = "models/volleyvision_detection.pt"
+    events_path    = "models/volleyvision_events.pt"
+
+    if not Path(detection_path).exists():
+        with st.spinner("⬇️ Descargando modelo de detección..."):
+            detection_path = hf_hub_download(
+                repo_id="norapfr/volleyvision-models",
+                filename="volleyvision_detection.pt",
+                local_dir="models"
+            )
+
+    if not Path(events_path).exists():
+        with st.spinner("⬇️ Descargando modelo de eventos..."):
+            events_path = hf_hub_download(
+                repo_id="norapfr/volleyvision-models",
+                filename="volleyvision_events.pt",
+                local_dir="models"
+            )
+
+    detection = YOLO(detection_path)
+    events    = YOLO(events_path)
     return detection, events
 
 detection_model, events_model = load_models()

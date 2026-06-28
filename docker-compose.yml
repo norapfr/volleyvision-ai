@@ -6,8 +6,8 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - ./data/processed:/app/data/processed
       - ./models:/app/models
+      - ./data/processed:/app/data/processed
     environment:
       - ROBOFLOW_API_KEY=${ROBOFLOW_API_KEY}
     restart: unless-stopped
