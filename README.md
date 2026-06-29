@@ -178,8 +178,8 @@ source venv/bin/activate  # Linux/Mac
 
 pip install -r requirements.txt
 
-cp .env.example .env
-# edit .env and add your HF_TOKEN
+
+# edit .env and add your HF_TOKEN & ROBOFLOW_API
 
 streamlit run src/dashboard/app.py
 ```
@@ -192,7 +192,6 @@ Open `http://localhost:8501`
 git clone https://github.com/norapfr/volleyvision-ai.git
 cd volleyvision-ai
 
-cp .env.example .env
 # edit .env with your keys
 
 docker-compose up --build
